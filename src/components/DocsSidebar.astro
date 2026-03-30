@@ -1,0 +1,35 @@
+---
+import {docSections} from '../lib/docs';
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<aside class="sticky top-24 self-start border-r border-zinc-800/80 pr-6">
+  <p class="mb-6 text-[11px] font-medium uppercase tracking-[0.28em] text-zinc-500">CommerceForge Docs</p>
+  {docSections.map((section) => (
+    <section class="border-t border-zinc-800/80 pt-5 first:border-t-0 first:pt-0">
+      <h2 class="mb-3 text-sm font-semibold tracking-tight text-zinc-100">{section.title}</h2>
+      <ul class="grid gap-1">
+        {section.items.map((item) => {
+          const itemPath = item.href.replace(/\/$/, '') || '/';
+          const isActive = currentPath === itemPath;
+          return (
+            <li>
+              <a
+                class:list={[
+                  'block border-l px-3 py-2 text-sm transition',
+                  isActive
+                    ? 'border-indigo-400 text-zinc-50'
+                    : 'border-transparent text-zinc-400 hover:border-zinc-700 hover:text-zinc-100',
+                ]}
+                href={item.href}
+              >
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  ))}
+</aside>

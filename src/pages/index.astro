@@ -1,0 +1,76 @@
+---
+import DocsLayout from '../layouts/DocsLayout.astro';
+import {docsHomeCards} from '../lib/docs';
+---
+
+<DocsLayout
+  title="CommerceForge Docs"
+  description="Installation, deployment, B2B, i18n, and theming guides for CommerceForge."
+>
+  <p class="mb-3 text-[11px] font-medium uppercase tracking-[0.28em] text-zinc-500">Documentation</p>
+  <h1 class="mt-0 max-w-[10ch] text-4xl font-semibold tracking-tight text-zinc-50 md:text-6xl">
+    Production docs for CommerceForge.
+  </h1>
+  <p class="lead mt-6">
+    CommerceForge is a production-ready Shopify Hydrogen storefront starter for agencies and
+    developers. This documentation covers setup, environment variables, B2B, internationalization,
+    theming, and deployment.
+  </p>
+
+  <div class="docs-grid">
+    <div class="docs-panel">
+      <h3 class="text-base font-semibold tracking-tight text-zinc-50">B2C + B2B</h3>
+      <p>
+        One codebase for consumer storefronts and Shopify Plus B2B flows.
+      </p>
+    </div>
+    <div class="docs-panel">
+      <h3 class="text-base font-semibold tracking-tight text-zinc-50">27 locales</h3>
+      <p>
+        Markets-aware localization with RTL support and path-prefix routing.
+      </p>
+    </div>
+    <div class="docs-panel">
+      <h3 class="text-base font-semibold tracking-tight text-zinc-50">Release-ready</h3>
+      <p>
+        Local development, Oxygen deployment, and commercial release packaging.
+      </p>
+    </div>
+  </div>
+
+  <blockquote>
+    <p>
+      Start with installation, then configure environment variables, connect Shopify, and move into
+      B2B, localization, theming, and deployment once the storefront is running locally.
+    </p>
+  </blockquote>
+
+  <h2>Start here</h2>
+  <div class="mt-6 grid gap-4 md:grid-cols-2">
+    {docsHomeCards.map((card) => (
+      <a
+        class="group border border-zinc-800/80 bg-zinc-900/25 p-5 transition hover:border-zinc-700 hover:bg-zinc-900/45"
+        href={card.href}
+      >
+        <p class="mb-2 text-[11px] font-medium uppercase tracking-[0.24em] text-zinc-500">
+          Guide
+        </p>
+        <h3 class="m-0 text-lg font-semibold tracking-tight text-zinc-50">{card.label}</h3>
+        <p class="mt-2 mb-0 text-sm leading-7 text-zinc-400">{card.description}</p>
+      </a>
+    ))}
+  </div>
+
+  <h2>What’s inside CommerceForge</h2>
+  <p>
+    The storefront ships with collections, products, variants, cart, checkout, predictive search,
+    full-page search, blogs, customer accounts, B2B pricing via buyer context, request-a-quote,
+    Shopify Markets localization, RTL support, and a responsive UI system built with shadcn/ui and
+    Tailwind CSS.
+  </p>
+
+  <p>
+    Use the guides on the left to set up your environment, connect Shopify, configure B2B, deploy
+    to Oxygen, and customize the design system.
+  </p>
+</DocsLayout>

@@ -1,0 +1,111 @@
+---
+import DocsSidebar from '../components/DocsSidebar.astro';
+import {getDocMeta} from '../lib/docs';
+import '../styles/tailwind.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {title = 'CommerceForge Docs', description = 'Documentation for CommerceForge.'} =
+  Astro.props;
+const docMeta = getDocMeta(Astro.url.pathname);
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-zinc-950 text-zinc-50 antialiased">
+    <div class="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(99,102,241,0.12),transparent_26rem),radial-gradient(circle_at_top_right,rgba(255,255,255,0.05),transparent_18rem)]">
+      <header class="sticky top-0 z-50 border-b border-zinc-800/80 bg-zinc-950/85 backdrop-blur-xl">
+        <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
+          <a href="/" class="flex items-center gap-2.5 font-semibold tracking-tight text-zinc-50">
+            <img src="/favicon.svg" alt="CommerceForge" class="h-8 w-8" />
+            <span>CommerceForge Docs</span>
+          </a>
+          <nav class="hidden items-center gap-3 text-sm md:flex">
+            <a class="text-zinc-400 hover:text-zinc-50" href="https://commerceforge.dev">Website</a>
+            <a class="text-zinc-400 hover:text-zinc-50" href="https://demo.commerceforge.dev">Demo</a>
+          </nav>
+        </div>
+      </header>
+
+      <div class="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-10 lg:grid-cols-[250px_minmax(0,1fr)] lg:gap-16">
+        <DocsSidebar />
+        <main class="min-w-0">
+          <article class="docs-prose max-w-none border-l border-zinc-800/80 pl-0 lg:pl-10">
+            {
+              docMeta && (
+                <div class="mb-8 border-b border-zinc-800/80 pb-6">
+                  <p class="mb-2 text-[11px] font-medium uppercase tracking-[0.28em] text-zinc-500">
+                    {docMeta.sectionTitle}
+                  </p>
+                  {docMeta.item.description && (
+                    <p class="m-0 max-w-2xl text-sm leading-7 text-zinc-400">
+                      {docMeta.item.description}
+                    </p>
+                  )}
+                </div>
+              )
+            }
+            <slot />
+          </article>
+        </main>
+      </div>
+    </div>
+    <script>
+      const addCopyButtons = () => {
+        const blocks = document.querySelectorAll('pre');
+
+        for (const block of blocks) {
+          if (block.querySelector('[data-copy-button]')) continue;
+
+          const code = block.querySelector('code');
+          if (!code?.textContent?.trim()) continue;
+
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.textContent = 'Copy';
+          button.className = 'docs-copy-button';
+          button.setAttribute('data-copy-button', 'true');
+
+          button.addEventListener('click', async () => {
+            const original = button.textContent ?? 'Copy';
+
+            try {
+              await navigator.clipboard.writeText(code.textContent ?? '');
+              button.textContent = 'Copied';
+            } catch {
+              button.textContent = 'Failed';
+            }
+
+            window.setTimeout(() => {
+              button.textContent = original;
+            }, 1600);
+          });
+
+          block.appendChild(button);
+        }
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', addCopyButtons, {once: true});
+      } else {
+        addCopyButtons();
+      }
+    </script>
+  </body>
+</html>
