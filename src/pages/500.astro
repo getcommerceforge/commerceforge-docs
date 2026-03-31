@@ -1,0 +1,37 @@
+---
+import DocsLayout from '../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+  title="500 — Server error"
+  description="An unexpected error occurred while rendering this documentation page."
+  noindex={true}
+>
+  <p class="mb-3 text-[11px] font-medium uppercase tracking-[0.28em] text-zinc-500">Error</p>
+  <h1>Something went wrong.</h1>
+  <p class="lead">
+    An unexpected error occurred while rendering this page.
+  </p>
+
+  <blockquote>
+    <p>
+      Retry the page, return to the docs homepage, or open the public demo while the issue is
+      resolved.
+    </p>
+  </blockquote>
+
+  <div class="mt-8 flex flex-wrap gap-3">
+    <a
+      href="/"
+      class="inline-flex items-center border border-zinc-700 bg-zinc-900/70 px-4 py-2 text-sm font-medium text-zinc-100 transition hover:border-zinc-600 hover:bg-zinc-900"
+    >
+      Back to docs
+    </a>
+    <a
+      href="https://demo.commerceforge.dev"
+      class="inline-flex items-center border border-zinc-800 bg-transparent px-4 py-2 text-sm font-medium text-zinc-400 transition hover:border-zinc-700 hover:text-zinc-100"
+    >
+      Open demo
+    </a>
+  </div>
+</DocsLayout>
