@@ -1,6 +1,15 @@
 ---
 import DocsLayout from '../layouts/DocsLayout.astro';
 import {docsHomeCards} from '../lib/docs';
+import shoppingBag from 'lucide-static/icons/shopping-bag.svg?raw';
+import languages from 'lucide-static/icons/languages.svg?raw';
+import fileText from 'lucide-static/icons/file-text.svg?raw';
+
+const iconMarkup: Record<string, string> = {
+  commerce: shoppingBag,
+  globe: languages,
+  seo: fileText,
+};
 ---
 
 <DocsLayout
@@ -19,18 +28,27 @@ import {docsHomeCards} from '../lib/docs';
 
   <div class="docs-grid">
     <div class="docs-panel">
+      <div class="mb-4 inline-flex h-11 w-11 items-center justify-center border border-indigo-500/20 bg-indigo-500/10 text-indigo-300">
+        <div class="[&>svg]:block [&>svg]:h-5 [&>svg]:w-5" set:html={iconMarkup.commerce} />
+      </div>
       <h3 class="text-base font-semibold tracking-tight text-zinc-50">B2C + B2B</h3>
       <p>
         One codebase for consumer storefronts and Shopify Plus B2B flows.
       </p>
     </div>
     <div class="docs-panel">
+      <div class="mb-4 inline-flex h-11 w-11 items-center justify-center border border-indigo-500/20 bg-indigo-500/10 text-indigo-300">
+        <div class="[&>svg]:block [&>svg]:h-5 [&>svg]:w-5" set:html={iconMarkup.globe} />
+      </div>
       <h3 class="text-base font-semibold tracking-tight text-zinc-50">27 locales</h3>
       <p>
         Markets-aware localization with RTL support and path-prefix routing.
       </p>
     </div>
     <div class="docs-panel">
+      <div class="mb-4 inline-flex h-11 w-11 items-center justify-center border border-indigo-500/20 bg-indigo-500/10 text-indigo-300">
+        <div class="[&>svg]:block [&>svg]:h-5 [&>svg]:w-5" set:html={iconMarkup.seo} />
+      </div>
       <h3 class="text-base font-semibold tracking-tight text-zinc-50">Release-ready</h3>
       <p>
         Local development, Oxygen deployment, and commercial release packaging.
